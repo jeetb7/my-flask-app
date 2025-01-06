@@ -1,0 +1,25 @@
+name: Docker Build Workflow
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the `main` branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Build the Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t my-docker-image:latest .
+          echo "Docker image is created by ${{ github.actor }}"
+      
+      # Step 3: Print confirmation message
+      - name: Confirm Image Creation
+        run: echo "Docker image is successfully created by ${{ github.actor }}"
